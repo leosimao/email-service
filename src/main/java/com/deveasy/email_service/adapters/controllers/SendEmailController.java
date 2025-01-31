@@ -1,7 +1,6 @@
 package com.deveasy.email_service.adapters.controllers;
 
-import com.deveasy.email_service.application.SendEmailUseCaseImpl;
-import com.deveasy.email_service.core.SendEmailDTO;
+import com.deveasy.email_service.core.DTO.SendEmailDTO;
 import com.deveasy.email_service.core.SendEmailUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,4 +1,4 @@
-package com.deveasy.email_service.core;
+package com.deveasy.email_service.core.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.deveasy.email_service.adapters;
 
-import com.deveasy.email_service.core.SendEmailDTO;
+import com.deveasy.email_service.core.DTO.SendEmailDTO;
 
 import java.io.IOException;
 

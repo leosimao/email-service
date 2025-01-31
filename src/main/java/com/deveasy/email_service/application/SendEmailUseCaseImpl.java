@@ -1,7 +1,7 @@
 package com.deveasy.email_service.application;
 
 import com.deveasy.email_service.adapters.SendEmailAdapter;
-import com.deveasy.email_service.core.SendEmailDTO;
+import com.deveasy.email_service.core.DTO.SendEmailDTO;
 import com.deveasy.email_service.core.SendEmailUseCase;
 import org.springframework.stereotype.Service;
 

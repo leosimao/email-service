@@ -1,10 +1,9 @@
 package com.deveasy.email_service.infrastructure;
 
 import com.deveasy.email_service.adapters.SendEmailAdapter;
-import com.deveasy.email_service.core.SendEmailDTO;
+import com.deveasy.email_service.core.DTO.SendEmailDTO;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
-import com.sendgrid.Response;
 import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
@@ -37,19 +36,7 @@ public class SendGridSendEmailAdapter implements SendEmailAdapter {
         emailPersonalization.addTo(toEmail);
 
         Mail mailComplete = buildMail(fromEmail, subjectEmail, emailPersonalization, contentEmail);
-
-        Request requestSendEmail = new Request();
-        try {
-            requestSendEmail.setMethod(Method.POST);
-            requestSendEmail.setEndpoint("mail/send");
-            requestSendEmail.setBody(mailComplete.build());
-            Response response = sendGrid.api(requestSendEmail);
-            System.out.println(response.getStatusCode());
-            System.out.println(response.getBody());
-            System.out.println(response.getHeaders());
-        } catch (IOException ex) {
-            throw ex;
-        }
+        sendRequestEmail(mailComplete, sendGrid);
     }
 
     private Mail buildMail(Email fromEmail,
@@ -69,5 +56,13 @@ public class SendGridSendEmailAdapter implements SendEmailAdapter {
         Email buildEmail = new Email();
         buildEmail.setEmail(email);
         return buildEmail;
+    }
+
+    private void sendRequestEmail(Mail mailComplete, SendGrid sendGrid) throws IOException {
+        Request requestSendEmail = new Request();
+        requestSendEmail.setMethod(Method.POST);
+        requestSendEmail.setEndpoint("mail/send");
+        requestSendEmail.setBody(mailComplete.build());
+        sendGrid.api(requestSendEmail);
     }
 }
