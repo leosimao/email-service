@@ -10,15 +10,23 @@ import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 import com.sendgrid.helpers.mail.objects.Personalization;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
 @Service
 public class SendGridSendEmailAdapter implements SendEmailAdapter {
+
+    private final String apiKeySendGrid;
+
+    public SendGridSendEmailAdapter(@Value("${api.key.sendgrid}") String apiKeySendGrid) {
+        this.apiKeySendGrid = apiKeySendGrid;
+    }
+
     @Override
     public void sendEmail(SendEmailDTO sendEmailDTO) throws IOException {
-        SendGrid sendGrid = new SendGrid("spring.sendgrid.api-key");
+        SendGrid sendGrid = new SendGrid(apiKeySendGrid);
         Email fromEmail = buildEmail(sendEmailDTO.getFrom());
         Email toEmail = buildEmail(sendEmailDTO.getDestiny());
         Content contentEmail = new Content();

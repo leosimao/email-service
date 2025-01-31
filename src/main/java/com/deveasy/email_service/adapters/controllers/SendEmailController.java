@@ -2,6 +2,7 @@ package com.deveasy.email_service.adapters.controllers;
 
 import com.deveasy.email_service.application.SendEmailUseCaseImpl;
 import com.deveasy.email_service.core.SendEmailDTO;
+import com.deveasy.email_service.core.SendEmailUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,16 +14,15 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/email")
 public class SendEmailController {
-
-    private final SendEmailUseCaseImpl sendEmailUseCaseImpl;
+    private final SendEmailUseCase sendEmailUseCase;
 
     @Autowired
-    public SendEmailController(SendEmailUseCaseImpl sendEmailUseCase) {
-        this.sendEmailUseCaseImpl = sendEmailUseCase;
+    public SendEmailController(SendEmailUseCase sendEmailUseCase) {
+        this.sendEmailUseCase = sendEmailUseCase;
     }
 
     @PostMapping("/sendEmail")
     public void sendEmail(@RequestBody SendEmailDTO sendEmailDTO) throws IOException {
-        sendEmailUseCaseImpl.sendEmail(sendEmailDTO);
+        sendEmailUseCase.sendEmail(sendEmailDTO);
     }
 }
